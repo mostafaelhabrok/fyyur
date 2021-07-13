@@ -1,0 +1,54 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Show Search{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-sm-6">
+		<h1 class="monospace">
+			{{ show.name }}
+		</h1>
+		<p class="subtitle">
+			ID: {{ show.id }}
+		</p>
+		
+		<div class="tile tile-show">
+            <img src="{{ show.artist_image_link }}" alt="Artist Image" />
+            <h4>{{ show.starttime }}</h4>
+            <h5><a href="/artists/{{ show.artist_id }}">{{ show.artist_name }}</a></h5>
+            <p>playing at</p>
+            <h5><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h5>
+            
+
+        </div>
+		
+		
+<a href="/" class="btn btn-danger" id="delete" data-id="{{ show.id }}">Delete</a>
+<a href="/shows/{{ show.id }}/edit" class="btn btn-primary" id="edit" data-id="{{ show.id }}">Edit</a>
+
+<script>
+    document.getElementById('delete') 
+		.onclick = function(event){
+	
+			console.log('event',event);
+	
+			const deleteid = event.target.dataset['id'];
+			console.log(deleteid);
+			fetch('/shows/'+ deleteid ,{
+							method:'DELETE',
+							headers:{
+								'Content-Type':'application/json'
+							}
+												
+						}).then(function(){
+							document.getElementById('error').className='hidden';
+							//location.href="home.html"
+						})
+						
+						.catch(function(){
+					  document.getElementById("error").className="";
+				  })
+        }
+
+       
+</script>
+{% endblock %}
+
