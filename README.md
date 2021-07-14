@@ -180,3 +180,39 @@ python3 app.py
 6. **Verify on the Browser**<br>
 Navigate to project homepage [http://127.0.0.1:5000/](http://127.0.0.1:5000/) or [http://localhost:5000](http://localhost:5000) 
 
+create table show (
+  id int primary key,
+  name varchar (50),
+  artist_id int ,
+  artist_name varchar (50),
+  venue_id int ,
+  venue_name varchar (50),
+  starttime varchar (120),
+  foreign key (artist_id) references artist (id),
+  foreign key (venue_id) references venue (id)
+);
+
+
+create table artist (
+  id int primary key,
+  name varchar (50),
+  city varchar (50),
+  state varchar (50),
+  phone varchar (50),
+  genres varchar (50),
+  image_link varchar (50),
+  facebook_link varchar (50)
+);
+
+
+create table venue (
+  id int primary key,
+  name varchar (50),
+  city varchar (50),
+  state varchar (50),
+  address varchar (50),
+  phone varchar (50),
+  genres varchar (50),
+  image_link varchar (50),
+  facebook_link varchar (50)
+);
