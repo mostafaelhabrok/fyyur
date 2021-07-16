@@ -17,6 +17,7 @@ from forms import *
 from flask_migrate import Migrate, migrate
 from datetime import datetime
 from sqlalchemy import func
+import psycopg2
 
 #----------------------------------------------------------------------------#
 # App Config.
@@ -170,7 +171,7 @@ def create_venue_submission():
 
   error =False
   try:
-    name = request.form.get('name')
+    """     name = request.form.get('name')
     city = request.form.get('city')
     state = request.form.get('state')
     address = request.form.get('address')
@@ -179,7 +180,32 @@ def create_venue_submission():
     facebook_link = request.form.get('facebook_link')
     newvenue = Venue(name=name,city=city,state=state,address=address,phone=phone,genres=genres,facebook_link=facebook_link)
     db.session.add(newvenue)
-    db.session.commit()
+    db.session.commit() """
+    sql = """INSERT INTO venue(id,name)
+             VALUES(30,'mostafaa');"""
+    # read database configuration
+    # params = config()
+    # connect to the PostgreSQL database
+    """ conn = psycopg2.connect(user="mostafa",
+                                  password="root1234",
+                                  host="postgresql-38627-0.cloudclusters.net",
+                                  port="38656",
+                                  database="fyyur") """
+    conn = psycopg2.connect(user="aguekfdkrnfrhe",
+                                  password="a94cee48d98b1013ce570a252765d81e63d418c77cc70ff78c3e62df6ba76bd4",
+                                  host="ec2-52-5-1-20.compute-1.amazonaws.com",
+                                  port="5432",
+                                  database="d2doiu74e2s8o5")
+    # create a new cursor
+    cur = conn.cursor()
+    # execute the INSERT statement
+    cur.execute(sql)
+    # get the generated id back
+    # vendor_id = cur.fetchone()[0]
+    # commit the changes to the database
+    conn.commit()
+    # close communication with the database
+    cur.close()
   except:
      error= True
      db.session.rollback()
